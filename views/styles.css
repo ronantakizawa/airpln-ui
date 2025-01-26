@@ -1,0 +1,37 @@
+/* Targeting the h1 element for our spinning title */
+h1 {
+  /* Text Styling: Making it bold and vibrant */
+  color: rgb(240, 101, 89);               /* Bright red color to catch the eye */
+  font-size: 4rem;          /* Large text size (4 times the root font size) */
+  font-weight: bold;        /* Makes the text extra prominent */
+
+  /* Positioning and Layout */
+  text-align: center;       /* Centers the text horizontally */
+  margin-top: 20vh;         /* Positions the title 20% from the top of the viewport */
+
+  /* Animation Properties: Creating the spin effect */
+  animation-name: fullRotation;        /* Name of our custom animation */
+  animation-duration: 3s;              /* Takes 3 seconds for one complete rotation */
+  animation-timing-function: ease-in-out; /* Smooth acceleration and deceleration */
+  animation-iteration-count: infinite; /* Keeps spinning forever */
+}
+
+/* Defining the rotation animation using keyframes */
+@keyframes fullRotation {
+  /* Starting position: no rotation */
+  from {
+      transform: rotate(0deg);
+  }
+  /* Ending position: complete 360-degree rotation */
+  to {
+      transform: rotate(0deg);
+  }
+}
+
+/* Optional: Adding a hover effect to make it more interactive */
+h1:hover {
+  /* When you hover over the title, it will change color */
+  color: darkred;
+  /* The spin might become faster or have a different animation */
+  animation-duration: 1s;
+}

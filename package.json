@@ -1,0 +1,23 @@
+{
+  "name": "tamuhack2025",
+  "version": "1.0.0",
+  "description": "TAMUHack 2025",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronantakizawa/tamuhack2025.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronantakizawa/tamuhack2025/issues"
+  },
+  "homepage": "https://github.com/ronantakizawa/tamuhack2025#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
