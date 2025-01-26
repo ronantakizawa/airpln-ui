@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airplane UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="//unpkg.com/globe.gl"></script>
+    <script src="//unpkg.com/three"></script>
+
+    <title>Hello</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #F2F1EB;
+            font-family: Georgia, serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #333;
+            margin-top: 15vh;
+            margin-bottom: 5vh;
+            font-family: "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            text-transform: none;
+            content: "Airline UI";
+        }
+
+        .box-container {
+        display: flex;
+        gap: 6vh; /* Space between boxes */
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        justify-content: center; /* Centers the boxes */
+        position: relative;
+        }
+
+        .box {
+            width: 250px;
+            height: 250px;
+            background-color: transparent;
+            border: 2.5pt solid #D9D7D0;
+            border-radius: 45px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: center;
+            content: "hello";
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box-description-container {
+            display: flex;
+            justify-content: center;
+            gap: 6vh; /* Matches the gap of the boxes above */
+            margin-top: 10px; /* Adjusts spacing between boxes and labels */
+        }
+
+        .box-description {
+            font-family: 'Georgia', serif;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Loading Animation Styles */
+        #loading-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        #loading-text {
+            font-size: 20px;
+            color: #0477BF;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #plane-container {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            left: 30%;
+            transform: translate(-30%, -30%);
+            animation: orbit 3s linear infinite;
+        }
+
+        #plane {
+            position: absolute;
+            top: -45px;
+            left: 80%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            fill: #0477BF;
+            transform-origin: 50% 100%;
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Button Styles */
+        .plane-button {
+            padding: 14px 30px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #0477BF, #0477BF);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .plane-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .plane {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            fill: white;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes flyPlane {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) rotate(var(--rotation));
+                opacity: 0;
+            }
+        }
+
+        .download-button {
+            padding: 12px 32px;
+            font-size: 16px;
+            background: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            min-width: 140px;
+        }
+
+        .download-button:hover {
+            background: #0369a1;
+        }
+
+        .button-text {
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .plane {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            fill: white;
+            top: 50%;
+            left: -30px;
+            transform: translateY(-50%);
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .checkmark {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .checkmark path {
+            stroke: white;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            transition: stroke-dashoffset 0.3s ease 0.1s;
+        }
+
+        .button-success {
+            background: #16a34a;
+        }
+
+        .button-success:hover {
+            background: #16a34a;
+        }
+
+        .download-button[disabled] {
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <h1>Airpln UI</h1>
+    <span>Custom Designs to Elevate Your Airline Website!</span>
+    <div class="box-container">
+        <div class="box">
+            <div id="loading-container">
+                <span id="loading-text">Loading.</span>
+                <div id="plane-container">
+                    <svg id="plane" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                        <path d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <button class="plane-button" id="planeButton">
+                Click!
+            </button>
+        </div>
+        <div class="box">
+            <button class="download-button" id="downloadButton">
+                <span class="button-text">Book Flight</span>
+                <div class="progress-bar"></div>
+                <svg class="plane" viewBox="0 0 576 512">
+                    <path d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z"/>
+                </svg>
+                <svg class="checkmark" viewBox="0 0 24 24">
+                    <path fill="none" d="M3.5 12.5L9.5 18.5L20.5 5.5"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Loading animation
+            const loadingText = document.getElementById('loading-text');
+            let dots = 1;
+            setInterval(() => {
+                loadingText.textContent = "Loading";
+                for (let i = 0; i < dots; i++) {
+                    loadingText.textContent += ".";
+                }
+                dots = (dots % 3) + 1;
+            }, 500);
+        
+            // Button animation
+            const button = document.getElementById('planeButton');
+            button.addEventListener('click', () => {
+                for (let i = 0; i < 9; i++) {
+                    createPlane();
+                }
+            });
+
+            function createPlane() {
+            const plane = document.createElement('div');
+            plane.innerHTML = `
+                <svg id="plane" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                        <path d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z"/>
+                    </svg>
+            `;
+    
+            const svg = plane.querySelector('svg');
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 100 + Math.random() * 200;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
+            const rotation = (Math.random() - 0.5) * 720;
+    
+            svg.style.setProperty('--tx', `${tx}px`);
+            svg.style.setProperty('--ty', `${ty}px`);
+            svg.style.setProperty('--rotation', `${rotation}deg`);
+    
+            const rect = button.getBoundingClientRect();
+            plane.style.position = 'absolute';
+            plane.style.left = `${rect.left + rect.width / 2 - 12}px`;
+            plane.style.top = `${rect.top + rect.height / 2 - 12}px`;
+    
+            svg.style.animation = 'flyPlane 1s ease-out forwards';
+    
+            document.body.appendChild(plane);
+            setTimeout(() => {
+                document.body.removeChild(plane);
+            }, 1000);
+            }
+
+        // Globe initialization
+            const globe = Globe()
+                .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+                .backgroundColor('rgba(0,0,0,0)')
+                .width(250)
+                .height(250)(document.getElementById('globeViz'));
+        
+            // Auto-rotate
+            globe.controls().autoRotate = true;
+            globe.controls().autoRotateSpeed = 0.5;
+        
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                globe.width(250).height(250);
+            });
+            });
+
+            const button = document.getElementById('downloadButton');
+            const progressBar = button.querySelector('.progress-bar');
+            const plane = button.querySelector('.plane');
+            const buttonText = button.querySelector('.button-text');
+            const checkmark = button.querySelector('.checkmark');
+        
+            button.addEventListener('click', () => {
+                if (button.disabled) return;
+            
+            // Disable button
+            button.disabled = true;
+            
+            // Start progress animation
+            progressBar.style.width = '100%';
+            plane.style.left = 'calc(100% + 30px)';
+            plane.style.opacity = '1';
+            buttonText.style.opacity = '0';
+            
+            // After progress completes
+            setTimeout(() => {
+                // Add success class
+                button.classList.add('button-success');
+                
+                // Hide plane and progress bar
+                plane.style.opacity = '0';
+                progressBar.style.opacity = '0';
+                
+                // Show checkmark
+                checkmark.style.transform = 'translate(-50%, -50%) scale(1)';
+                checkmark.style.opacity = '1';
+                checkmark.querySelector('path').style.strokeDashoffset = '0';
+                
+                // Reset after delay
+                setTimeout(() => {
+                    // Reset all styles
+                    button.disabled = false;
+                    button.classList.remove('button-success');
+                    progressBar.style.width = '0';
+                    progressBar.style.opacity = '1';
+                    plane.style.left = '-30px';
+                    setTimeout(() => {
+                    // Reset all styles
+                    plane.style.opacity = '1';
+                }, 1000);
+                    buttonText.style.opacity = '1';
+                    checkmark.style.transform = 'translate(-50%, -50%) scale(0)';
+                    checkmark.style.opacity = '0';
+                    checkmark.querySelector('path').style.strokeDashoffset = '48';
+                }, 2000);
+            }, 800);
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
