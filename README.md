@@ -90,6 +90,15 @@ A loading indicator featuring an orbiting airplane animation.
 ### CloudLoading
 A scenic loading animation with floating clouds and a flying airplane.
 
+### OrbitLoadingCircle
+A circular progress indicator with a rotating airplane along its path.
+
+### FlightMapGlobe
+An interactive 3D globe visualization for displaying flight paths and routes.
+
+### PlaneBackground
+A decorative background component featuring animated flying planes.
+
 ## Browser Support
 
 - Chrome (latest)
