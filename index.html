@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airpln UI</title>
     
-    <!-- Import Roboto font -->
+    <!-- Import Roboto and Roboto Mono fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Import Airpln UI components from CDN -->
+    <!-- Import Airpln UI components -->
     <script type="module">
         import { BurstButton, ProgressButton, OrbitLoading, CloudLoading } 
         from 'https://cdn.jsdelivr.net/npm/@ronantakizawa/airpln-ui@1.0.2/dist/index.mjs';
@@ -46,6 +46,8 @@
             margin-bottom: 5vh;
             justify-content: center;
             position: relative;
+            flex-wrap: wrap;
+            padding: 0 20px;
         }
 
         .box {
@@ -62,13 +64,12 @@
             overflow: hidden;
         }
 
-        /* Make cloud-loading fill the entire box */
         .box cloud-loading {
             position: absolute;
-            right: 35px;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            zoom: 125%;
         }
 
         .box-description-container {
@@ -76,6 +77,8 @@
             justify-content: center;
             gap: 6vh;
             margin-top: 24px;
+            flex-wrap: wrap;
+            padding: 0 20px;
         }
 
         .box-description {
@@ -100,6 +103,72 @@
             margin: 0.5rem 0 2rem 0;
             font-weight: 300;
             letter-spacing: 0.2px;
+        }
+
+        .code-section {
+            width: 100%;
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .code-container {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-header {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-family: 'Roboto Mono', monospace;
+            opacity: 0.7;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+            color: #fff;
+            white-space: pre;
+        }
+
+        .comment {
+            color: #6a9955;
+        }
+
+        .keyword {
+            color: #569cd6;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .tag {
+            color: #4ec9b0;
+        }
+
+        @media (max-width: 768px) {
+            .box-container {
+                gap: 4vh;
+            }
+            
+            .box-description-container {
+                gap: 4vh;
+            }
+            
+            .code-section {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -138,6 +207,51 @@
         <div class="box-description">
             <strong>Cloud Loading</strong>
             Scenic loading with clouds and planes
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-container">
+            <div class="code-header">Installation</div>
+            <div class="code-block"><span class="comment">// Using NPM</span>
+npm install @ronantakizawa/airpln-ui
+
+<span class="comment">// Using CDN</span>
+&lt;script type="module"&gt;
+    import { BurstButton, ProgressButton, OrbitLoading, CloudLoading } 
+    from 'https://cdn.jsdelivr.net/npm/@ronantakizawa/airpln-ui@1.0.2/dist/index.mjs';
+&lt;/script&gt;</div>
+        </div>
+
+        <div class="code-container">
+            <div class="code-header">Usage in HTML</div>
+            <div class="code-block"><span class="comment"><!-- Orbit Loading --></span>
+&lt;orbit-loading&gt;&lt;/orbit-loading&gt;
+
+<span class="comment"><!-- Burst Button --></span>
+&lt;burst-button&gt;Click Me!&lt;/burst-button&gt;
+
+<span class="comment"><!-- Progress Button --></span>
+&lt;progress-button&gt;Book Flight&lt;/progress-button&gt;
+
+<span class="comment"><!-- Cloud Loading --></span>
+&lt;cloud-loading&gt;&lt;/cloud-loading&gt;</div>
+        </div>
+
+        <div class="code-container">
+            <div class="code-header">Usage in React</div>
+            <div class="code-block"><span class="keyword">import</span> '@ronantakizawa/airpln-ui'
+
+<span class="keyword">function</span> <span class="tag">App</span>() {
+  <span class="keyword">return</span> (
+    &lt;div&gt;
+      &lt;orbit-loading&gt;&lt;/orbit-loading&gt;
+      &lt;burst-button&gt;Click Me!&lt;/burst-button&gt;
+      &lt;progress-button&gt;Book Flight&lt;/progress-button&gt;
+      &lt;cloud-loading&gt;&lt;/cloud-loading&gt;
+    &lt;/div&gt;
+  )
+}</div>
         </div>
     </div>
 </body>
