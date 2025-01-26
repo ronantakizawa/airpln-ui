@@ -1,428 +1,327 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Airpln-UI</title>
-   <!-- Import Roboto and Roboto Mono fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-
-
-
-  <!-- Import Airpln UI components -->
-  <script type="module">
-      import { BurstButton, ProgressButton, OrbitLoading, CloudLoading, OrbitLoadingCircle }
-      from 'https://cdn.jsdelivr.net/npm/@ronantakizawa/airpln-ui@1.0.3/dist/index.mjs';
-  </script>
-
-
-
-
-  <style>
-      body {
-          margin: 0;
-          padding: 0;
-          min-height: 100vh;
-          background-color: #F2F1EB;
-          font-family: 'Roboto', sans-serif;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
-
-
-
-
-      h1 {
-          font-size: 3.5rem;
-          color: #333;
-          margin-top: 1vh;
-          margin-bottom: 1vh;
-          font-family: 'Roboto', sans-serif;
-          font-weight: 700;
-          text-transform: none;
-          letter-spacing: -0.5px;
-      }
-
-
-
-
-              .box-container {
-          display: flex;
-          gap: 6vh;
-          margin-top: 1vh;
-          margin-bottom: 2vh;
-          justify-content: center;
-          position: relative;
-          flex-wrap: wrap;
-          padding: 0 20px;
-          max-width: 900px;
-          width: 100%;
-      }
-
-
-
-
-      .component-wrapper {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 24px;
-      }
-
-
-
-
-      .box {
-          width: 250px;
-          height: 250px;
-          background-color: transparent;
-          border: 2.5pt solid #D9D7D0;
-          border-radius: 45px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          position: relative;
-          overflow: hidden;
-      }
-
-
-
-
-      .box-description {
-          font-family: 'Roboto', sans-serif;
-          width: 250px;
-          text-align: center;
-          color: #666;
-          font-size: 1.2rem;
-          font-weight: 300;
-          letter-spacing: 0.2px;
-          line-height: 1.5;
-      }
-
-
-
-
-      .box-description strong {
-          display: block;
-          margin-bottom: 8px;
-      }
-
-
-
-
-      @media (max-width: 768px) {
-          .box-container {
-              gap: 4vh;
-          }
-      }
-
-
-
-
-      .box {
-          width: 250px;
-          height: 250px;
-          background-color: transparent;
-          border: 2.5pt solid #D9D7D0;
-          border-radius: 45px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          position: relative;
-          overflow: hidden;
-      }
-
-
-
-
-      .box cloud-loading {
-          position: absolute;
-          right: 37px;
-          width: 100%;
-          height: 100%;
-          zoom: 125%;
-      }
-
-
-
-
-      .box-description-container {
-          display: flex;
-          justify-content: center;
-          gap: 6vh;
-          margin-top: 24px;
-          flex-wrap: wrap;
-          padding: 0 20px;
-      }
-
-
-
-
-      .box-description {
-          font-family: 'Roboto', sans-serif;
-          width: 250px;
-          text-align: center;
-          color: #666;
-          font-size: 1.2rem;
-          font-weight: 300;
-          letter-spacing: 0.2px;
-          line-height: 1.5;
-      }
-
-
-
-
-      .box-description strong {
-          display: block;
-          margin-bottom: 8px;
-      }
-
-
-
-
-      span.subtitle {
-          font-size: 1.2rem;
-          color: #666;
-          margin: 0.5rem 0 2rem 0;
-          font-weight: 300;
-          letter-spacing: 0.2px;
-      }
-
-
-
-
-      .code-section {
-          width: 100%;
-          max-width: 800px;
-          margin: 60px auto;
-          padding: 0 20px;
-      }
-
-
-
-
-      .code-container {
-          background: #1a1a1a;
-          border-radius: 12px;
-          padding: 24px;
-          margin: 20px 0;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-
-
-
-      .code-header {
-          color: #fff;
-          font-size: 1rem;
-          font-weight: 500;
-          margin-bottom: 12px;
-          font-family: 'Roboto', sans-serif;
-          opacity: 0.7;
-      }
-
-
-
-
-      .code-block {
-          background: #1a1a1a;
-          padding: 16px;
-          border-radius: 8px;
-          font-family: 'Roboto', sans-serif;
-          font-size: 14px;
-          line-height: 1.6;
-          overflow-x: auto;
-          color: #fff;
-          white-space: pre;
-      }
-
-
-
-
-      .comment {
-          color: #6a9955;
-      }
-
-
-
-
-      .keyword {
-          color: #569cd6;
-      }
-
-
-
-
-      .string {
-          color: #ce9178;
-      }
-
-
-
-
-      .tag {
-          color: #4ec9b0;
-      }
-
-
-
-
-      @media (max-width: 768px) {
-          .box-container {
-              gap: 4vh;
-          }
-        
-          .box-description-container {
-              gap: 4vh;
-          }
-        
-          .code-section {
-              font-size: 14px;
-          }
-      }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airpln-UI</title>
+    <!-- Import Roboto and Roboto Mono fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Import Airpln UI components -->
+    <script type="module">
+        import { BurstButton, ProgressButton, OrbitLoading, CloudLoading, OrbitLoadingCircle, FlightMapGlobe }
+        from './airline-components.js';
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #F2F1EB;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #333;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: -0.5px;
+        }
+
+        .box-container {
+            display: flex;
+            gap: 6vh;
+            margin-top: 1vh;
+            margin-bottom: 2vh;
+            justify-content: center;
+            position: relative;
+            flex-wrap: wrap;
+            padding: 0 20px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .component-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .box {
+            width: 250px;
+            height: 250px;
+            background-color: transparent;
+            border: 2.5pt solid #D9D7D0;
+            border-radius: 45px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box cloud-loading {
+            position: absolute;
+            right: 37px;
+            width: 100%;
+            height: 100%;
+            zoom: 125%;
+        }
+
+        .box-description {
+            font-family: 'Roboto', sans-serif;
+            width: 250px;
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.2px;
+            line-height: 1.5;
+        }
+
+        .box-description strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        span.subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin: 0.5rem 0 2rem 0;
+            font-weight: 300;
+            letter-spacing: 0.2px;
+        }
+
+        /* Flight Map Section Styles */
+        .flight-map-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .flight-map-container {
+            width: 100%;
+            height: 600px;
+            background-color: transparent;
+            border: 2.5pt solid #D9D7D0;
+            border-radius: 45px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 0.2px;
+            line-height: 1.5;
+        }
+
+        .code-section {
+            width: 100%;
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .code-container {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-header {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-family: 'Roboto', sans-serif;
+            opacity: 0.7;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+            color: #fff;
+            white-space: pre;
+        }
+
+        .comment {
+            color: #6a9955;
+        }
+
+        .keyword {
+            color: #569cd6;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .tag {
+            color: #4ec9b0;
+        }
+
+        @media (max-width: 768px) {
+            .box-container {
+                gap: 4vh;
+            }
+            
+            .flight-map-container {
+                height: 400px;
+                border-radius: 25px;
+            }
+
+            .code-section {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Airpln-UI</h1>
-  <span class="subtitle">Custom Designs to Elevate Your Airline Website!</span>
-   <div class="box-container">
-      <div class="component-wrapper">
-          <div class="box">
-              <orbit-loading></orbit-loading>
-          </div>
-          <div class="box-description">
-              <strong>Orbit Loading</strong>
-              A smooth, circular loading animation
-          </div>
-      </div>
-      <div class="component-wrapper">
-          <div class="box">
-              <burst-button>Click Me!</burst-button>
-          </div>
-          <div class="box-description">
-              <strong>Burst Button</strong>
-              Interactive button with plane burst effects
-          </div>
-      </div>
-      <div class="component-wrapper">
-          <div class="box">
-              <progress-button>Book Flight</progress-button>
-          </div>
-          <div class="box-description">
-              <strong>Progress Button</strong>
-              Animated booking confirmation button
-          </div>
-      </div>
-      <div class="component-wrapper">
-          <div class="box">
-              <cloud-loading></cloud-loading>
-          </div>
-          <div class="box-description">
-              <strong>Cloud Loading</strong>
-              Scenic loading with clouds and planes
-          </div>
-      </div>
-      <div class="component-wrapper">
-          <div class="box">
-              <orbit-loading-circle></orbit-loading-circle>
-          </div>
-          <div class="box-description">
-              <strong>Orbit Loading Circle</strong>
-              Progress ring with rotating plane
-          </div>
-      </div>
-      <div class="component-wrapper">
-       <div class="box">
-           <plane-background></plane-background>
-       </div>
-       <div class="box-description">
-           <strong>Plane Background</strong>
-           Background of planes flying
-       </div>
-   </div>
-  </div>
+    <h1>Airpln-UI</h1>
+    <span class="subtitle">Custom Designs to Elevate Your Airline Website!</span>
+    
+    <div class="box-container">
+                        <plane-background></plane-background>
+        <div class="component-wrapper">
+            <div class="box">
+                <orbit-loading></orbit-loading>
+            </div>
+            <div class="box-description">
+                <strong>Orbit Loading</strong>
+                A smooth, circular loading animation
+            </div>
+        </div>
+        <div class="component-wrapper">
+            <div class="box">
+                <burst-button>Click Me!</burst-button>
+            </div>
+            <div class="box-description">
+                <strong>Burst Button</strong>
+                Interactive button with plane burst effects
+            </div>
+        </div>
+        <div class="component-wrapper">
+            <div class="box">
+                <progress-button>Book Flight</progress-button>
+            </div>
+            <div class="box-description">
+                <strong>Progress Button</strong>
+                Animated booking confirmation button
+            </div>
+        </div>
+        <div class="component-wrapper">
+            <div class="box">
+                <cloud-loading></cloud-loading>
+            </div>
+            <div class="box-description">
+                <strong>Cloud Loading</strong>
+                Scenic loading with clouds and planes
+            </div>
+        </div>
+        <div class="component-wrapper">
+            <div class="box">
+                <orbit-loading-circle></orbit-loading-circle>
+            </div>
+            <div class="box-description">
+                <strong>Orbit Loading Circle</strong>
+                Progress ring with rotating plane
+            </div>
+        </div>
+        </div>
+    </div>
 
+    <div class="flight-map-section">
+        <h2 class="section-title">Interactive Flight Map</h2>
+        <p class="section-description">Visualize flight paths with real-time metrics and 3D globe interaction</p>
+        <div class="flight-map-container">
+            <flight-map-globe></flight-map-globe>
+        </div>
+    </div>
 
-
-
-  <div class="code-section">
-      <div class="code-container">
-          <div class="code-header">Installation</div>
-          <div class="code-block"><span class="comment">// Using NPM</span>
+    <div class="code-section">
+        <div class="code-container">
+            <div class="code-header">Installation</div>
+            <div class="code-block"><span class="comment">// Using NPM</span>
 npm install @ronantakizawa/airpln-ui
-
-
-
 
 <span class="comment">// Using CDN</span>
 &lt;script type="module"&gt;
-  import { BurstButton, ProgressButton, OrbitLoading, CloudLoading, OrbitLoadingCircle }
-  from 'https://cdn.jsdelivr.net/npm/@ronantakizawa/airpln-ui@1.0.3/dist/index.mjs';
+    import { BurstButton, ProgressButton, OrbitLoading, CloudLoading, OrbitLoadingCircle, FlightMapGlobe }
+    from 'https://cdn.jsdelivr.net/npm/@ronantakizawa/airpln-ui@1.0.3/dist/index.mjs';
 &lt;/script&gt;</div>
-      </div>
+        </div>
 
-
-
-
-      <div class="code-container">
-          <div class="code-header">Usage in HTML</div>
-          <div class="code-block"><span class="comment"><!-- Orbit Loading --></span>
+        <div class="code-container">
+            <div class="code-header">Usage in HTML</div>
+            <div class="code-block"><span class="comment"><!-- Orbit Loading --></span>
 &lt;orbit-loading&gt;&lt;/orbit-loading&gt;
-
-
-
 
 <span class="comment"><!-- Burst Button --></span>
 &lt;burst-button&gt;Click Me!&lt;/burst-button&gt;
 
-
-
-
 <span class="comment"><!-- Progress Button --></span>
 &lt;progress-button&gt;Book Flight&lt;/progress-button&gt;
-
-
-
 
 <span class="comment"><!-- Cloud Loading --></span>
 &lt;cloud-loading&gt;&lt;/cloud-loading&gt;
 
-
-
-
 <span class="comment"><!-- Orbit Loading Circle --></span>
-&lt;orbit-loading-circle&gt;&lt;/orbit-loading-circle&gt;</div>
-      </div>
+&lt;orbit-loading-circle&gt;&lt;/orbit-loading-circle&gt;
 
+<span class="comment"><!-- Flight Map Globe --></span>
+&lt;flight-map-globe&gt;&lt;/flight-map-globe&gt;</div>
+        </div>
 
-
-
-      <div class="code-container">
-          <div class="code-header">Usage in React</div>
-          <div class="code-block"><span class="keyword">import</span> '@ronantakizawa/airpln-ui'
-
-
-
+        <div class="code-container">
+            <div class="code-header">Usage in React</div>
+            <div class="code-block"><span class="keyword">import</span> '@ronantakizawa/airpln-ui'
 
 <span class="keyword">function</span> <span class="tag">App</span>() {
-<span class="keyword">return</span> (
-  &lt;div&gt;
-    &lt;orbit-loading&gt;&lt;/orbit-loading&gt;
-    &lt;burst-button&gt;Click Me!&lt;/burst-button&gt;
-    &lt;progress-button&gt;Book Flight&lt;/progress-button&gt;
-    &lt;cloud-loading&gt;&lt;/cloud-loading&gt;
-    &lt;orbit-loading-circle&gt;&lt;/orbit-loading-circle&gt;
-  &lt;/div&gt;
-)
+    <span class="keyword">return</span> (
+        &lt;div&gt;
+            &lt;orbit-loading&gt;&lt;/orbit-loading&gt;
+            &lt;burst-button&gt;Click Me!&lt;/burst-button&gt;
+            &lt;progress-button&gt;Book Flight&lt;/progress-button&gt;
+            &lt;cloud-loading&gt;&lt;/cloud-loading&gt;
+            &lt;orbit-loading-circle&gt;&lt;/orbit-loading-circle&gt;
+            &lt;flight-map-globe&gt;&lt;/flight-map-globe&gt;
+        &lt;/div&gt;
+    )
 }</div>
-      </div>
-  </div>
+        </div>
+    </div>
 </body>
 </html>
