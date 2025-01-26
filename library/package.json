@@ -1,13 +1,14 @@
 {
     "name": "@ronantakizawa/airpln-ui",
-    "version": "1.1.0",
+    "version": "1.1.2",
     "description": "A collection of airline-themed UI web components",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
     "files": [
-        "dist"
+        "dist",
+        "README.md"
     ],
     "scripts": {
         "build": "rollup -c",
@@ -49,5 +50,4 @@
     "dependencies": {
         "@ronantakizawa/airpln-ui": "^1.0.4"
     }
- }
- 
+}
