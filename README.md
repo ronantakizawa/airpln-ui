@@ -4,7 +4,8 @@ https://ronantakizawa.github.io/airpln-ui/
 
 A sleek, modern UI component library designed specifically for airline and travel-related websites. This kit provides interactive, aviation-themed UI elements with smooth animations and a professional aesthetic.
 
-<img width="1072" alt="Screenshot 2025-01-26 at 7 07 16 AM" src="https://github.com/user-attachments/assets/719264cd-13e2-4df1-9b43-e835c726252c" />
+
+<img width="1004" alt="Screenshot 2025-01-26 at 10 42 33 AM" src="https://github.com/user-attachments/assets/577007c5-1f19-4a38-b483-e58b5e3213d3" />
 
 ## Installation
 
