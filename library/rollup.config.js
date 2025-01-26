@@ -8,7 +8,7 @@ const config = {
     {
       file: 'dist/index.js',
       format: 'umd',
-      name: 'AirlineComponents',
+      name: 'airpln-ui',
       plugins: [terser()]
     },
     {

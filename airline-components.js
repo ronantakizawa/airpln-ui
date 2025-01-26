@@ -1,12 +1,14 @@
 // airline-components.js
 
 
+
+
 // Burst Button Component
 class BurstButton extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-       
+      
         this.shadowRoot.innerHTML = `
             <style>
                 .plane-button {
@@ -17,17 +19,14 @@ class BurstButton extends HTMLElement {
                     border: none;
                     border-radius: 8px;
                     cursor: pointer;
-                    position: relative;
+                    Pos
+ ition: relative;
                     overflow: hidden;
                     transition: transform 0.2s;
                 }
- 
- 
                 .plane-button:hover {
                     transform: translateY(-2px);
                 }
- 
- 
                 .plane {
                     position: absolute;
                     width: 24px;
@@ -36,8 +35,6 @@ class BurstButton extends HTMLElement {
                     opacity: 0;
                     pointer-events: none;
                 }
- 
- 
                 @keyframes flyPlane {
                     0% {
                         transform: translate(0, 0) rotate(0deg);
@@ -53,20 +50,14 @@ class BurstButton extends HTMLElement {
                 <slot>Click!</slot>
             </button>
         `;
- 
- 
         this.button = this.shadowRoot.querySelector('.plane-button');
         this.button.addEventListener('click', () => this.createPlanes());
     }
- 
- 
     createPlanes() {
         for (let i = 0; i < 8; i++) {
             this.createPlane();
         }
     }
- 
- 
     createPlane() {
         // Create a style element for the animation if it doesn't exist
         if (!document.querySelector('#burst-plane-style')) {
@@ -85,53 +76,43 @@ class BurstButton extends HTMLElement {
             `;
             document.head.appendChild(style);
         }
- 
- 
         const plane = document.createElement('div');
         plane.style.position = 'fixed';
         plane.style.zIndex = '9999';
         plane.style.pointerEvents = 'none';
-       
+      
         plane.innerHTML = `
             <svg class="plane" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="width: 24px; height: 24px; fill: #0477BF;">
                 <path d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z"/>
             </svg>
         `;
- 
- 
         const rect = this.button.getBoundingClientRect();
         const angle = Math.random() * Math.PI * 2;
         const distance = 100 + Math.random() * 200;
         const endX = Math.cos(angle) * distance;
         const endY = Math.sin(angle) * distance;
- 
- 
         plane.style.left = `${rect.left + rect.width / 2}px`;
         plane.style.top = `${rect.top + rect.height / 2}px`;
         plane.style.transform = `translate(-50%, -50%)`;
         plane.style.animation = 'burstFlyPlane 1s ease-out forwards';
- 
- 
         // Add specific transform for this plane
         plane.style.animationName = 'none'; // Reset animation
         void plane.offsetWidth; // Force reflow
         plane.style.animationName = 'burstFlyPlane';
         plane.style.transform = `translate(calc(-50% + ${endX}px), calc(-50% + ${endY}px)) rotate(${angle * (180/Math.PI)}deg)`;
-       
+      
         document.body.appendChild(plane);
         setTimeout(() => {
             document.body.removeChild(plane);
         }, 1000);
     }
  }
- 
- 
  // Progress Button Component
  class ProgressButton extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-       
+      
         this.shadowRoot.innerHTML = `
             <style>
                 .download-button {
@@ -148,19 +129,13 @@ class BurstButton extends HTMLElement {
                     font-family: 'Roboto', sans-serif;
                     min-width: 140px;
                 }
- 
- 
                 .download-button:hover {
                     background: #0369a1;
                 }
- 
- 
                 .button-text {
                     display: inline-block;
                     transition: opacity 0.2s ease;
                 }
- 
- 
                 .plane {
                     position: absolute;
                     width: 20px;
@@ -171,8 +146,6 @@ class BurstButton extends HTMLElement {
                     transform: translateY(-50%);
                     transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
                 }
- 
- 
                 .checkmark {
                     position: absolute;
                     width: 20px;
@@ -183,8 +156,6 @@ class BurstButton extends HTMLElement {
                     opacity: 0;
                     transition: all 0.3s ease;
                 }
- 
- 
                 .checkmark path {
                     stroke: white;
                     stroke-width: 2;
@@ -194,18 +165,12 @@ class BurstButton extends HTMLElement {
                     stroke-dashoffset: 48;
                     transition: stroke-dashoffset 0.3s ease 0.1s;
                 }
- 
- 
                 .button-success {
                     background: #16a34a;
                 }
- 
- 
                 .button-success:hover {
                     background: #16a34a;
                 }
- 
- 
                 .download-button[disabled] {
                     cursor: default;
                 }
@@ -220,39 +185,33 @@ class BurstButton extends HTMLElement {
                 </svg>
             </button>
         `;
- 
- 
         this.button = this.shadowRoot.querySelector('.download-button');
         this.plane = this.shadowRoot.querySelector('.plane');
         this.buttonText = this.shadowRoot.querySelector('.button-text');
         this.checkmark = this.shadowRoot.querySelector('.checkmark');
-       
+      
         this.button.addEventListener('click', () => this.startAnimation());
     }
- 
- 
     startAnimation() {
         if (this.button.disabled) return;
-       
+      
         this.button.disabled = true;
         this.plane.style.left = 'calc(100% + 30px)';
         this.buttonText.style.opacity = '0';
-       
+      
         setTimeout(() => {
             this.button.classList.add('button-success');
             this.plane.style.opacity = '0';
-           
+          
             this.checkmark.style.transform = 'translate(-50%, -50%) scale(1)';
             this.checkmark.style.opacity = '1';
             this.checkmark.querySelector('path').style.strokeDashoffset = '0';
-           
+          
             setTimeout(() => {
                 this.reset();
             }, 2000);
         }, 800);
     }
- 
- 
     reset() {
         this.button.disabled = false;
         this.button.classList.remove('button-success');
@@ -266,28 +225,22 @@ class BurstButton extends HTMLElement {
         this.checkmark.style.opacity = '0';
     }
  }
- 
- 
  // Orbit Loading Component
  class OrbitLoading extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-       
+      
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
                     display: block;
                 }
- 
- 
                 #loading-container {
                     position: relative;
                     width: 200px;
                     height: 200px;
                 }
- 
- 
                 #loading-text {
                     font-size: 20px;
                     color: #0477BF;
@@ -297,8 +250,6 @@ class BurstButton extends HTMLElement {
                     transform: translate(-50%, -50%);
                     font-family: 'Roboto', sans-serif;
                 }
- 
- 
                 #plane-container {
                     position: absolute;
                     width: 100px;
@@ -308,8 +259,6 @@ class BurstButton extends HTMLElement {
                     transform: translate(-30%, -30%);
                     animation: orbit 3s linear infinite;
                 }
- 
- 
                 #plane {
                     position: absolute;
                     top: -45px;
@@ -320,8 +269,6 @@ class BurstButton extends HTMLElement {
                     fill: #0477BF;
                     transform-origin: 50% 100%;
                 }
- 
- 
                 @keyframes orbit {
                     from { transform: rotate(0deg); }
                     to { transform: rotate(360deg); }
@@ -336,33 +283,27 @@ class BurstButton extends HTMLElement {
                 </div>
             </div>
         `;
- 
- 
         this.loadingText = this.shadowRoot.getElementById('loading-text');
         this.dots = 1;
-       
+      
         setInterval(() => {
             this.loadingText.textContent = "Loading" + ".".repeat(this.dots);
             this.dots = (this.dots % 3) + 1;
         }, 500);
     }
  }
- 
- 
  // Cloud Loading Component
  class CloudLoading extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-       
+      
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
                     display: block;
                     min-height: 200px;
                 }
- 
- 
                 .scene {
                     position: relative;
                     width: 300px;
@@ -371,8 +312,6 @@ class BurstButton extends HTMLElement {
                     border-radius: 8px;
                     overflow: hidden;
                 }
- 
- 
                 .plane {
                     position: absolute;
                     width: 40px;
@@ -382,8 +321,6 @@ class BurstButton extends HTMLElement {
                     z-index: 2;
                     animation: fly 4s infinite ease-in-out;
                 }
- 
- 
                 .cloud {
                     position: absolute;
                     background: white;
@@ -391,8 +328,6 @@ class BurstButton extends HTMLElement {
                     animation: float-across 8s linear infinite;
                     opacity: 0.9;
                 }
- 
- 
                 .cloud::before,
                 .cloud::after {
                     content: '';
@@ -400,72 +335,54 @@ class BurstButton extends HTMLElement {
                     background: white;
                     border-radius: 50%;
                 }
- 
- 
                 .cloud-1::before {
                     width: 35px;
                     height: 35px;
                     top: -20px;
                     left: 10px;
                 }
- 
- 
                 .cloud-1::after {
                     width: 45px;
                     height: 45px;
                     top: -25px;
                     left: 40px;
                 }
- 
- 
                 .cloud-2 {
                     width: 80px;
                     height: 25px;
                     top: 100px;
                     animation-delay: -4s;
                 }
- 
- 
                 .cloud-2::before {
                     width: 30px;
                     height: 30px;
                     top: -15px;
                     left: 5px;
                 }
- 
- 
                 .cloud-2::after {
                     width: 35px;
                     height: 35px;
                     top: -20px;
                     left: 30px;
                 }
- 
- 
                 .cloud-3 {
                     width: 120px;
                     height: 35px;
                     top: 150px;
                     animation-delay: -2s;
                 }
- 
- 
                 .cloud-3::before {
                     width: 40px;
                     height: 40px;
                     top: -25px;
                     left: 15px;
                 }
- 
- 
                 .cloud-3::after {
                     width: 50px;
                     height: 50px;
                     top: -30px;
                     left: 45px;
                 }
- 
- 
                 @keyframes float-across {
                     from {
                         left: 320px;
@@ -476,8 +393,6 @@ class BurstButton extends HTMLElement {
                         transform: translateX(0);
                     }
                 }
- 
- 
                 @keyframes fly {
                     0%, 100% {
                         transform: translate(130px, 80px) rotate(5deg);
@@ -489,8 +404,6 @@ class BurstButton extends HTMLElement {
                         transform: translate(130px, 100px) rotate(8deg);
                     }
                 }
- 
- 
                 .loading-text {
                     position: absolute;
                     bottom: 10px;
@@ -503,8 +416,6 @@ class BurstButton extends HTMLElement {
                     white-space: nowrap;
                     font-family: 'Roboto', sans-serif;
                 }
- 
- 
                 .dots {
                     display: inline-block;
                     width: 24px;
@@ -520,41 +431,31 @@ class BurstButton extends HTMLElement {
                 <div class="loading-text">Loading<span class="dots"></span></div>
             </div>
         `;
- 
- 
         this.dots = this.shadowRoot.querySelector('.dots');
         this.dotCount = 0;
- 
- 
         setInterval(() => {
             this.dotCount = (this.dotCount % 3) + 1;
             this.dots.textContent = '.'.repeat(this.dotCount);
         }, 500);
     }
  }
- 
- 
  // OrbitLoadingCircle Component (from loading2.html)
  class OrbitLoadingCircle extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-       
+      
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
                     display: block;
                     font-family: 'Roboto', sans-serif;
                 }
- 
- 
                 #loading-container {
                     position: relative;
                     width: 200px;
                     height: 200px;
                 }
- 
- 
                 #loading-text {
                     font-size: 20px;
                     color: #0477BF;
@@ -565,8 +466,6 @@ class BurstButton extends HTMLElement {
                     left: 50%;
                     transform: translate(-50%, -50%);
                 }
- 
- 
                 .progress-ring {
                     position: absolute;
                     top: 50%;
@@ -577,8 +476,6 @@ class BurstButton extends HTMLElement {
                     border-radius: 50%;
                     border: 3px solid rgba(4, 119, 191, 0.1);
                 }
- 
- 
                 .progress-ring::after {
                     content: '';
                     position: absolute;
@@ -592,8 +489,6 @@ class BurstButton extends HTMLElement {
                     transform-origin: center;
                     animation: rotate 2s linear infinite;
                 }
- 
- 
                 .plane {
                     position: absolute;
                     width: 24px;
@@ -603,8 +498,6 @@ class BurstButton extends HTMLElement {
                     left: 128px;
                     transform: translateX(-50%) rotate(45deg);
                 }
- 
- 
                 .plane-wrapper {
                     position: absolute;
                     top: 50%;
@@ -614,8 +507,6 @@ class BurstButton extends HTMLElement {
                     transform-origin: center;
                     animation: rotate 2s linear infinite;
                 }
- 
- 
                 @keyframes rotate {
                     from { transform: translate(-50%, -50%) rotate(0deg); }
                     to { transform: translate(-50%, -50%) rotate(360deg); }
@@ -631,33 +522,25 @@ class BurstButton extends HTMLElement {
                 <span id="loading-text">Loading</span>
             </div>
         `;
- 
- 
         this.loadingText = this.shadowRoot.getElementById('loading-text');
         let dots = 1;
- 
- 
         setInterval(() => {
             this.loadingText.textContent = "Loading" + ".".repeat(dots);
             dots = (dots % 3) + 1;
         }, 500);
     }
  }
- 
- 
  // Passport Book Component
  class PassportBook extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-       
+      
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
                     display: block;
                 }
- 
- 
                 .book-container {
                     display: flex;
                     align-items: center;
@@ -665,8 +548,6 @@ class BurstButton extends HTMLElement {
                     perspective: 80px;
                     padding: 50px 0;
                 }
- 
- 
                 @keyframes initAnimation {
                     0% {
                         transform: rotateY(0deg);
@@ -675,8 +556,6 @@ class BurstButton extends HTMLElement {
                         transform: rotateY(-21deg);
                     }
                 }
- 
- 
                 .book {
                     width: 10px;
                     height: 10px;
@@ -686,14 +565,10 @@ class BurstButton extends HTMLElement {
                     transition: 0.5s ease;
                     animation: 1s ease 0s 1 initAnimation;
                 }
- 
- 
                 .book-container:hover .book,
                 .book-container:focus .book {
                     transform: rotateY(0deg);
                 }
- 
- 
                 .book > :first-child {
                     position: absolute;
                     top: 0;
@@ -705,8 +580,6 @@ class BurstButton extends HTMLElement {
                     border-radius: 0 2px 2px 0;
                     box-shadow: 5px 5px 10px #666;
                 }
- 
- 
                 .book::before {
                     position: absolute;
                     content: ' ';
@@ -739,8 +612,6 @@ class BurstButton extends HTMLElement {
                         #fff 100%
                     );
                 }
- 
- 
                 .book::after {
                     position: absolute;
                     top: 0;
@@ -752,8 +623,6 @@ class BurstButton extends HTMLElement {
                     background-color: #008efa;
                     border-radius: 0 2px 2px 0;
                 }
- 
- 
                 img {
                     width: 10%;
                     height: 10%;
@@ -774,6 +643,125 @@ class BurstButton extends HTMLElement {
  }
  
  
+ // Plane Background Component
+ class PlaneBackground extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+       
+        this.shadowRoot.innerHTML = `
+            <style>
+                :host {
+                    display: block;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: -1;
+                }
+ 
+ 
+                .bg-container {
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(135deg, #9dbed6 0%, #ecf5ff 100%);
+                    background-image:
+                        radial-gradient(rgba(255,255,255,0.5) 15%, transparent 20%),
+                        radial-gradient(rgba(255,255,255,0.4) 10%, transparent 20%);
+                    background-size: 250px 250px, 300px 300px;
+                    background-position: 50px 100px, 250px 300px;
+                    overflow: hidden;
+                }
+ 
+ 
+                .bg-planes {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    overflow: hidden;
+                }
+ 
+ 
+                .bg-plane {
+                    position: absolute;
+                    font-size: 2rem;
+                    color: rgba(0, 0, 0, 0.2);
+                    animation: roam linear infinite;
+                }
+ 
+ 
+                .bg-plane:nth-child(1) {
+                    top: 5%;  left: -10%;
+                    font-size: 2.2rem;
+                    animation-duration: 18s;
+                }
+                .bg-plane:nth-child(2) {
+                    top: 20%; left: -15%;
+                    font-size: 1.8rem;
+                    color: rgba(0, 0, 0, 0.25);
+                    animation-duration: 22s;
+                }
+                .bg-plane:nth-child(3) {
+                    top: 35%; left: -12%;
+                    animation-duration: 20s;
+                }
+                .bg-plane:nth-child(4) {
+                    top: 50%; left: -14%;
+                    font-size: 2.4rem;
+                    color: rgba(0, 0, 0, 0.15);
+                    animation-duration: 26s;
+                }
+                .bg-plane:nth-child(5) {
+                    top: 60%; left: -8%;
+                    font-size: 1.6rem;
+                    color: rgba(0, 0, 0, 0.1);
+                    animation-duration: 17s;
+                }
+                .bg-plane:nth-child(6) {
+                    top: 72%; left: -10%;
+                    font-size: 2rem;
+                    color: rgba(0, 0, 0, 0.2);
+                    animation-duration: 25s;
+                }
+                .bg-plane:nth-child(7) {
+                    top: 85%; left: -18%;
+                    font-size: 2.2rem;
+                    color: rgba(0, 0, 0, 0.18);
+                    animation-duration: 28s;
+                }
+                .bg-plane:nth-child(8) {
+                    top: 90%; left: -5%;
+                    font-size: 1.8rem;
+                    color: rgba(0, 0, 0, 0.25);
+                    animation-duration: 19s;
+                }
+ 
+ 
+                @keyframes roam {
+                    0%   { transform: translateX(0); }
+                    100% { transform: translateX(220vw); }
+                }
+            </style>
+            <div class="bg-container">
+                <div class="bg-planes">
+                    <div class="bg-plane">✈</div>
+                    <div class="bg-plane">✈</div>
+                    <div class="bg-plane">✈</div>
+                    <div class="bg-plane">✈</div>
+                    <div class="bg-plane">✈</div>
+                    <div class="bg-plane">✈</div>
+                    <div class="bg-plane">✈</div>
+                    <div class="bg-plane">✈</div>
+                </div>
+            </div>
+        `;
+    }
+ }
  // Register all components
  customElements.define('burst-button', BurstButton);
  customElements.define('progress-button', ProgressButton);
@@ -781,7 +769,6 @@ class BurstButton extends HTMLElement {
  customElements.define('cloud-loading', CloudLoading);
  customElements.define('orbit-loading-circle', OrbitLoadingCircle);
  customElements.define('passport-book', PassportBook);
- 
- 
+ customElements.define('plane-background', PlaneBackground);
  // Export the components
- export { BurstButton, ProgressButton, OrbitLoading, CloudLoading, OrbitLoadingCircle, PassportBook }
+ export { BurstButton, ProgressButton, OrbitLoading, CloudLoading, OrbitLoadingCircle, PassportBook, PlaneBackground }

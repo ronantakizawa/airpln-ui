@@ -1,6 +1,6 @@
 {
     "name": "@ronantakizawa/airpln-ui",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "A collection of airline-themed UI web components",
     "type": "module",
     "main": "dist/index.js",
@@ -47,6 +47,7 @@
         "node": ">=14.0.0"
     },
     "dependencies": {
-        "@ronantakizawa/airpln-ui": "^1.0.2"
+        "@ronantakizawa/airpln-ui": "^1.0.4"
     }
-}
+ }
+ 
