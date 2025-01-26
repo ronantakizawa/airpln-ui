@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Components CDN Test</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #2c5282;
+            margin-bottom: 20px;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .component-demo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Airline Components Demo</h1>
+
+    <div class="section">
+        <h2>Interactive Buttons</h2>
+        <div class="button-container">
+            <burst-button>Burst Effect</burst-button>
+            <progress-button>Book Flight</progress-button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Loading Animations</h2>
+        <div class="component-grid">
+            <div class="component-demo">
+                <orbit-loading></orbit-loading>
+            </div>
+            <div class="component-demo">
+                <cloud-loading></cloud-loading>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import components from jsDelivr -->
+    <script type="module">
+        import { BurstButton, ProgressButton, OrbitLoading, CloudLoading } 
+        from 'https://cdn.jsdelivr.net/gh/ronantakizawa/airpln-ui/airline-components.js';
+    </script>
+</body>
+</html>

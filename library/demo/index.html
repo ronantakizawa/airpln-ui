@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Components Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .demo-section {
+            margin: 40px 0;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #0284c7;
+        }
+    </style>
+</head>
+<body>
+    <h1>Airline Components Demo</h1>
+    
+    <div class="demo-section">
+        <h2>Burst Button</h2>
+        <burst-button>Click for Planes!</burst-button>
+    </div>
+
+    <div class="demo-section">
+        <h2>Progress Button</h2>
+        <progress-button>Book Flight</progress-button>
+    </div>
+
+    <div class="demo-section">
+        <h2>Orbit Loading</h2>
+        <orbit-loading></orbit-loading>
+    </div>
+
+    <div class="demo-section">
+        <h2>Cloud Loading</h2>
+        <cloud-loading></cloud-loading>
+    </div>
+
+    <script type="module">
+        import { BurstButton, ProgressButton, OrbitLoading, CloudLoading} from '../dist/index.mjs';
+    </script>
+</body>
+</html>

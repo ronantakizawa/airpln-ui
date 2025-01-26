@@ -1,0 +1,52 @@
+{
+    "name": "@ronantakizawa/airpln-ui",
+    "version": "1.0.2",
+    "description": "A collection of airline-themed UI web components",
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "rollup -c",
+        "dev": "rollup -c -w",
+        "test": "jest",
+        "prepublishOnly": "npm run build"
+    },
+    "keywords": [
+        "web-components",
+        "airline",
+        "ui",
+        "custom-elements",
+        "javascript",
+        "components",
+        "buttons",
+        "loading",
+        "animation"
+    ],
+    "author": "Ronan Takizawa",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.23.0",
+        "@babel/preset-env": "^7.22.20",
+        "@rollup/plugin-babel": "^6.0.4",
+        "@rollup/plugin-node-resolve": "^15.2.3",
+        "@rollup/plugin-terser": "^0.4.4",
+        "@types/jest": "^29.5.0",
+        "jest": "^29.5.0",
+        "jest-environment-jsdom": "^29.5.0",
+        "rollup": "^4.1.0",
+        "typescript": "^5.0.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "dependencies": {
+        "@ronantakizawa/airpln-ui": "^1.0.2"
+    }
+}
