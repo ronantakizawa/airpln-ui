@@ -16,7 +16,7 @@ export class ProgressButton extends HTMLElement {
                     position: relative;
                     overflow: hidden;
                     transition: background-color 0.3s ease;
-                    font-family: system-ui, -apple-system, sans-serif;
+                    font-family: 'Roboto', sans-serif;
                     min-width: 140px;
                 }
 

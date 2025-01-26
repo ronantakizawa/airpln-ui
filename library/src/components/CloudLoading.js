@@ -140,7 +140,7 @@ export class CloudLoading extends HTMLElement {
                     font-weight: 600;
                     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
                     white-space: nowrap;
-                    font-family: system-ui, -apple-system, sans-serif;
+                    font-family: 'Roboto', sans-serif;
                 }
 
                 .dots {

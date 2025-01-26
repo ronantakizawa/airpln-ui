@@ -24,7 +24,7 @@ export class OrbitLoadingCircle extends HTMLElement {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    font-family: system-ui, -apple-system, sans-serif;
+                    font-family: 'Roboto', sans-serif;
                 }
  
  

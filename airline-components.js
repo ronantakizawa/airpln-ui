@@ -145,7 +145,7 @@ class BurstButton extends HTMLElement {
                     position: relative;
                     overflow: hidden;
                     transition: background-color 0.3s ease;
-                    font-family: system-ui, -apple-system, sans-serif;
+                    font-family: 'Roboto', sans-serif;
                     min-width: 140px;
                 }
  
@@ -295,7 +295,7 @@ class BurstButton extends HTMLElement {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    font-family: system-ui, -apple-system, sans-serif;
+                    font-family: 'Roboto', sans-serif;
                 }
  
  
@@ -501,7 +501,7 @@ class BurstButton extends HTMLElement {
                     font-weight: 600;
                     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
                     white-space: nowrap;
-                    font-family: system-ui, -apple-system, sans-serif;
+                    font-family: 'Roboto', sans-serif;
                 }
  
  
@@ -544,7 +544,7 @@ class BurstButton extends HTMLElement {
             <style>
                 :host {
                     display: block;
-                    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+                    font-family: 'Roboto', sans-serif;
                 }
  
  
